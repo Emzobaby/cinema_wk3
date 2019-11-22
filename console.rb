@@ -19,6 +19,10 @@ customer3.save
 
 film1 = Film.new({"title" => "Joker", "price" => 10.00})
 film1.save
+film2 = Film.new({"title" => "Doctor Sleep", "price" => 10.00})
+film2.save
+film3 = Film.new({"title" => "Star Wars", "price" => 10.00})
+film3.save
 
 screening1 = Screening.new({"film_id" => film1.id, "time" => "19:00"})
 screening1.save
