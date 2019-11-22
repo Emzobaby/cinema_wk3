@@ -11,4 +11,12 @@ class Ticket
     @screening_id = options["screening_id"]
   end
 
+  def save
+    sql = "INSERT INTO tickets (customer_id, film_id, screening_id)
+    VALUES ($1, $2, $3) RETURNING id"
+    values = [@customer_id, @film_id, @screening_id]
+    result = SqlRunner.run(sql, values)[0]
+    @id = result["id"].to_i
+  end
+
 end
