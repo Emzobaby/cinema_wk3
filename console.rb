@@ -17,3 +17,6 @@ film1.save
 
 screening1 = Screening.new({"film_id" => film1.id, "time" => "19:00"})
 screening1.save
+
+ticket1 = Ticket.new({"customer_id" => customer1.id, "film_id" => film1.id, "screening_id" => screening1.id})
+ticket1.save
