@@ -8,6 +8,7 @@ require('pry-byebug')
 Customer.delete_all
 Film.delete_all
 Screening.delete_all
+Ticket.delete_all
 
 customer1 = Customer.new({"name" => "Brendan", "funds" => 100.00})
 customer1.save
