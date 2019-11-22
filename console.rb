@@ -26,6 +26,10 @@ film3.save
 
 screening1 = Screening.new({"film_id" => film1.id, "time" => "19:00"})
 screening1.save
+screening2 = Screening.new({"film_id" => film2.id, "time" => "20:00"})
+screening2.save
+screening3 = Screening.new({"film_id" => film3.id, "time" => "21:00"})
+screening3.save
 
 ticket1 = Ticket.new({"customer_id" => customer1.id, "film_id" => film1.id, "screening_id" => screening1.id})
 ticket1.save
