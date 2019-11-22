@@ -9,3 +9,6 @@ Customer.delete_all
 
 customer1 = Customer.new({"name" => "Brendan", "funds" => 100.00})
 customer1.save
+
+film1 = Film.new({"title" => "Joker", "price" => 10.00})
+film1.save
