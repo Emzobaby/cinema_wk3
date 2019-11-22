@@ -30,4 +30,10 @@ class Screening
     return screenings.map { |screening| Screening.new(screening)}
   end
 
+  def delete
+    sql = "DELETE FROM screenings WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
 end
