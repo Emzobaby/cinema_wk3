@@ -62,11 +62,18 @@ class Customer
     cost = film.price
     # Get customer's funds
     funds = self.funds
-    funds -= cost
     # Update customer funds by funds minus film price
+    funds -= cost
     sql = 'UPDATE customers SET funds = $1 WHERE id = $2'
     values = [funds, @id]
     SqlRunner.run(sql, values)
+  end
+
+  def ticket_count
+    sql = "SELECT*FROM tickets WHERE customer_id = $1"
+    values = [@id]
+    tickets = SqlRunner.run(sql, values)
+    return tickets.count
   end
 
 end
