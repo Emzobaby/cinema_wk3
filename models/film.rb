@@ -74,8 +74,8 @@ class Film
     # Loop through the tickets to get the screenings
     screenings = tickets.map { |ticket| ticket.screening_id }
     # Find the screening with the highest frequency
-    frequency = screenings.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
-    popular_screening = frequency.max_by { |v| frequency[v] }
+    frequency = screenings.inject(Hash.new(0)) { |h,v| h[v] += 1; h } # I got these 2 lines from stack overflow!
+    popular_screening = frequency.max_by { |v| frequency[v] } # I got these 2 lines from stack overflow!
     screening = popular_screening[0].to_i
     sql = "SELECT time FROM screenings WHERE id = $1"
     values = [screening]

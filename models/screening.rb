@@ -42,4 +42,13 @@ class Screening
     SqlRunner.run(sql, values)
   end
 
+  def limit_tickets
+    sql = "SELECT screening_id FROM tickets WHERE screening_id = $1"
+    values = [@id]
+    result = SqlRunner.run(sql, values).count
+    if result >= 25
+      return "This screening is full, please choose another film."
+    end
+  end
+
 end
