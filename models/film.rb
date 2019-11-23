@@ -51,4 +51,10 @@ class Film
     return customers.map { |customer| Customer.new(customer)}
   end
 
+  def price
+    sql = "SELECT price FROM films WHERE title = $1"
+    values = [@title]
+    return SqlRunner.run(sql, values)[0]["price"].to_i
+  end
+
 end

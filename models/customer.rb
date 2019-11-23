@@ -1,4 +1,5 @@
 require_relative('../db/sql_runner')
+require_relative('film')
 
 class Customer
 
@@ -48,6 +49,24 @@ class Customer
     values = [@id]
     films = SqlRunner.run(sql, values)
     films.map { |film| Film.new(film)}
+  end
+
+  def funds
+    sql = "SELECT funds FROM customers WHERE id = $1"
+    values = [@id]
+    return SqlRunner.run(sql, values)[0]["funds"].to_i
+  end
+
+  def buy_ticket(film)
+    # Get price of film
+    cost = film.price
+    # Get customer's funds
+    funds = self.funds
+    funds -= cost
+    # Update customer funds by funds minus film price
+    sql = 'UPDATE customers SET funds = $1 WHERE id = $2'
+    values = [funds, @id]
+    SqlRunner.run(sql, values)
   end
 
 end
