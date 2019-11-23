@@ -58,7 +58,28 @@ class Film
   end
 
   def customer_count
-    return self.customers.count 
+    return self.customers.count
+  end
+
+  def tickets
+    sql = "SELECT*FROM tickets WHERE film_id = $1"
+    values = [@id]
+    tickets = SqlRunner.run(sql, values)
+    return tickets.map { |ticket| Ticket.new(ticket)}
+  end
+
+  def most_popular_screening_time
+    # return the tickets sold for this film
+    tickets = self.tickets
+    # Loop through the tickets to get the screenings
+    screenings = tickets.map { |ticket| ticket.screening_id }
+    # Find the screening with the highest frequency
+    frequency = screenings.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+    popular_screening = frequency.max_by { |v| frequency[v] }
+    screening = popular_screening[0].to_i
+    sql = "SELECT time FROM screenings WHERE id = $1"
+    values = [screening]
+    return SqlRunner.run(sql, values)[0]["time"]
   end
 
 end
