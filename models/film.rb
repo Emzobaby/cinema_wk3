@@ -57,4 +57,8 @@ class Film
     return SqlRunner.run(sql, values)[0]["price"].to_i
   end
 
+  def customer_count
+    return self.customers.count 
+  end
+
 end
